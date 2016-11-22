@@ -105,7 +105,6 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
     }];
     _backgroundRangeImageView.center = center;
     _backgroundRangeImageView.frame = CGRectIntegral(_backgroundRangeImageView.frame);
-    _backgroundRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     _slidingView = [[UIView alloc] init];
     _slidingView.userInteractionEnabled = NO;
@@ -154,6 +153,10 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [self updateView:_backgroundRangeImageView frameChange:^(CGRect *frame) {
+        frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
+    }];
+    self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
     [self updateUI];
 }
 
@@ -376,8 +379,8 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
 
 - (UIEdgeInsets)slidingViewEdgeInsets {
     // Make handlers to be tangential with end of background.
-
-    return UIEdgeInsetsMake(0., (self.lowerHandler.bounds.size.width / 2.) - 1., 0., (self.lowerHandler.bounds.size.width / 2.) - 1.);
+    return UIEdgeInsetsZero;
+    //return UIEdgeInsetsMake(0., (self.lowerHandler.bounds.size.width / 2.) - 1., 0., (self.lowerHandler.bounds.size.width / 2.) - 1.);
 }
 
 - (CGFloat)overflowThresholdValue {

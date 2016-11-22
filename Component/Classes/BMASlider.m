@@ -135,6 +135,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [self updateView:_backgroundRangeImageView frameChange:^(CGRect *frame) {
+        frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
+    }];
+    self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
     [self updateUI];
 }
 
@@ -294,7 +298,8 @@
 
 - (UIEdgeInsets)slidingViewEdgeInsets {
     // Make handler to be tangential with end of background.
-    return UIEdgeInsetsMake(0., (self.handler.bounds.size.width / 2.) - 1., 0., (self.handler.bounds.size.width / 2.) - 1.);
+    return UIEdgeInsetsZero;
+    //return UIEdgeInsetsMake(0., (self.handler.bounds.size.width / 2.) - 1., 0., (self.handler.bounds.size.width / 2.) - 1.);
 }
 
 - (CGFloat)overflowThresholdValue {
