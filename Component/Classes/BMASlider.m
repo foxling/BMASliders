@@ -30,6 +30,8 @@
 @property (nonatomic, strong) UIView *slidingView;
 @property (nonatomic, strong) UIImageView *selectedRangeImageView;
 @property (nonatomic, strong) UIImageView *backgroundRangeImageView;
+@property (nonatomic, strong) UIImageView *leftCircleImageView;
+@property (nonatomic, strong) UIImageView *rightCircleImageView;
 @property (nonatomic, strong) UIImageView *handler;
 @property (nonatomic) UIEdgeInsets touchEdgeInsets;
 @property (nonatomic, readwrite, getter=isOverflow) BOOL overflow;
@@ -94,6 +96,9 @@
     _backgroundRangeImageView.frame = CGRectIntegral(_backgroundRangeImageView.frame);
     _backgroundRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
+    _leftCircleImageView = [UIImageView new];
+    _rightCircleImageView = [UIImageView new];
+
     _slidingView = [[UIView alloc] init];
     _slidingView.userInteractionEnabled = NO;
 
@@ -103,6 +108,8 @@
     _selectedRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     [self addSubview:self.slidingView];
+    [self addSubview:self.leftCircleImageView];
+    [self addSubview:self.rightCircleImageView];
     [self addSubview:self.backgroundRangeImageView];
     [self addSubview:self.selectedRangeImageView];
     [self addSubview:self.handler];
@@ -119,6 +126,7 @@
     self.handler.image = [self handlerImage];
     self.backgroundRangeImageView.image = [self unselectedLineImage];
     self.selectedRangeImageView.image = [self selectedLineImage];
+    self.leftCircleImageView.image = self.rightCircleImageView.image = [self circleImage];
 
     [self updateView:self.handler frameChange:^(CGRect *frame) {
         frame->size = [self handlerImage].size;
@@ -131,6 +139,14 @@
     [self updateView:self.backgroundRangeImageView frameChange:^(CGRect *frame) {
         frame->size.height = [self lineHeight];
     }];
+
+    [self updateView:self.leftCircleImageView frameChange:^(CGRect *frame) {
+        frame->size = [self circleImage].size;
+    }];
+    
+    [self updateView:self.rightCircleImageView frameChange:^(CGRect *frame) {
+        frame->size = [self circleImage].size;
+    }];
 }
 
 - (void)layoutSubviews {
@@ -139,6 +155,8 @@
         frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
     }];
     self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
+    self.leftCircleImageView.center = CGPointMake(CGRectGetMinX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));
+    self.rightCircleImageView.center = CGPointMake(CGRectGetMaxX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));
     [self updateUI];
 }
 
@@ -226,6 +244,10 @@
 
 - (CGFloat)lineHeight {
     return [self unselectedLineImage].size.height;
+}
+
+- (UIImage *)circleImage {
+    return [self.style circleImage];
 }
 
 #pragma mark - Convenience accessors

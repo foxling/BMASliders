@@ -66,4 +66,8 @@
     return thumbnail;
 }
 
+- (UIImage *)circleImage {
+    return nil;
+}
+
 @end

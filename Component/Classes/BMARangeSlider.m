@@ -36,6 +36,8 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
 @property (nonatomic, strong) UIView *slidingView;
 @property (nonatomic, strong) UIImageView *selectedRangeImageView;
 @property (nonatomic, strong) UIImageView *backgroundRangeImageView;
+@property (nonatomic, strong) UIImageView *leftCircleImageView;
+@property (nonatomic, strong) UIImageView *rightCircleImageView;
 @property (nonatomic, strong) UIImageView *lowerHandler;
 @property (nonatomic, strong) UIImageView *upperHandler;
 @property (nonatomic) UIEdgeInsets touchEdgeInsets;
@@ -106,6 +108,9 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
     _backgroundRangeImageView.center = center;
     _backgroundRangeImageView.frame = CGRectIntegral(_backgroundRangeImageView.frame);
 
+    _leftCircleImageView = [UIImageView new];
+    _rightCircleImageView = [UIImageView new];
+
     _slidingView = [[UIView alloc] init];
     _slidingView.userInteractionEnabled = NO;
 
@@ -115,6 +120,8 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
     _selectedRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     [self addSubview:_slidingView];
+    [self addSubview:_leftCircleImageView];
+    [self addSubview:_rightCircleImageView];
     [self addSubview:_backgroundRangeImageView];
     [self addSubview:_selectedRangeImageView];
     [self addSubview:_lowerHandler];
@@ -133,6 +140,7 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
     self.upperHandler.image = [self handlerImage];
     self.backgroundRangeImageView.image = [self unselectedLineImage];
     self.selectedRangeImageView.image = [self selectedLineImage];
+    self.leftCircleImageView.image = self.rightCircleImageView.image = [self circleImage];
 
     [self updateView:self.lowerHandler frameChange:^(CGRect *frame) {
         frame->size = [self handlerImage].size;
@@ -149,6 +157,14 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
     [self updateView:self.backgroundRangeImageView frameChange:^(CGRect *frame) {
         frame->size.height = [self lineHeight];
     }];
+
+    [self updateView:self.leftCircleImageView frameChange:^(CGRect *frame) {
+        frame->size = [self circleImage].size;
+    }];
+
+    [self updateView:self.rightCircleImageView frameChange:^(CGRect *frame) {
+        frame->size = [self circleImage].size;
+    }];
 }
 
 - (void)layoutSubviews {
@@ -157,6 +173,8 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
         frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
     }];
     self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
+    self.leftCircleImageView.center = CGPointMake(CGRectGetMinX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));
+    self.rightCircleImageView.center = CGPointMake(CGRectGetMaxX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));
     [self updateUI];
 }
 
@@ -289,6 +307,10 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
 
 - (CGFloat)lineHeight {
     return [self unselectedLineImage].size.height;
+}
+
+- (UIImage *)circleImage {
+    return [self.style circleImage];
 }
 
 #pragma mark - Convenience accessors
