@@ -170,7 +170,7 @@ typedef NS_ENUM(NSUInteger, BMARangeSliderHandler) {
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self updateView:_backgroundRangeImageView frameChange:^(CGRect *frame) {
-        frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
+        frame->size.width = self.bounds.size.width - [self handlerImage].size.width;
     }];
     self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
     self.leftCircleImageView.center = CGPointMake(CGRectGetMinX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));

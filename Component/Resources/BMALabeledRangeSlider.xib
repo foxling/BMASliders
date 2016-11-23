@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11760" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11755"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,6 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P31-Oa-w6Z" customClass="BMARangeSlider">
+                    <rect key="frame" x="0.0" y="28" width="372" height="26"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
@@ -33,6 +37,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG4-tP-DnV">
+                    <rect key="frame" x="8" y="8" width="32" height="20"/>
                     <attributedString key="attributedText">
                         <fragment content="Title">
                             <attributes>
@@ -45,6 +50,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3N-Bz-lAj">
+                    <rect key="frame" x="267" y="8" width="97" height="20"/>
                     <attributedString key="attributedText">
                         <fragment content="Range Detail">
                             <attributes>
@@ -59,11 +65,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="P31-Oa-w6Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4b4-3f-mvP"/>
                 <constraint firstAttribute="bottom" secondItem="P31-Oa-w6Z" secondAttribute="bottom" constant="3" id="9Am-fP-F5M"/>
                 <constraint firstItem="P31-Oa-w6Z" firstAttribute="top" secondItem="MG4-tP-DnV" secondAttribute="bottom" id="GZ5-ki-T4e"/>
+                <constraint firstAttribute="trailing" secondItem="P31-Oa-w6Z" secondAttribute="trailing" id="H6A-bt-2hu"/>
                 <constraint firstItem="MG4-tP-DnV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="RFK-KX-4G8"/>
-                <constraint firstItem="P31-Oa-w6Z" firstAttribute="leading" secondItem="MG4-tP-DnV" secondAttribute="leading" id="RTv-0M-gdi"/>
-                <constraint firstItem="P31-Oa-w6Z" firstAttribute="trailing" secondItem="s3N-Bz-lAj" secondAttribute="trailing" id="eYz-aD-MzN"/>
                 <constraint firstItem="MG4-tP-DnV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="fLa-1C-TLN"/>
                 <constraint firstAttribute="trailing" secondItem="s3N-Bz-lAj" secondAttribute="trailing" constant="8" id="qS0-sE-Cxw"/>
                 <constraint firstItem="s3N-Bz-lAj" firstAttribute="top" secondItem="MG4-tP-DnV" secondAttribute="top" id="weI-m6-ryg"/>

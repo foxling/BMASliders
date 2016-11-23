@@ -94,7 +94,7 @@
     }];
     _backgroundRangeImageView.center = center;
     _backgroundRangeImageView.frame = CGRectIntegral(_backgroundRangeImageView.frame);
-    _backgroundRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+//    _backgroundRangeImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     _leftCircleImageView = [UIImageView new];
     _rightCircleImageView = [UIImageView new];
@@ -152,7 +152,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self updateView:_backgroundRangeImageView frameChange:^(CGRect *frame) {
-        frame->size.width = self.bounds.size.width - [self unselectedLineImage].size.width;
+        frame->size.width = self.bounds.size.width - [self handlerImage].size.width;
     }];
     self.backgroundRangeImageView.center = CGPointMake(self.bounds.size.width / 2., self.bounds.size.height / 2.);
     self.leftCircleImageView.center = CGPointMake(CGRectGetMinX(self.backgroundRangeImageView.frame), CGRectGetMidY(self.backgroundRangeImageView.frame));
@@ -174,6 +174,7 @@
     CGFloat width = [self selectedRangeNormalizedLength] * self.backgroundRangeImageView.bounds.size.width;
     [self updateView:self.selectedRangeImageView frameChange:^(CGRect *frame) {
         frame->size.width = width;
+        frame->origin.x = CGRectGetMinX(self.backgroundRangeImageView.frame);
     }];
 }
 
